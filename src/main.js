@@ -1,6 +1,14 @@
-import './assets/main.css'
-
 import { createApp } from 'vue'
-import App from './App.vue'
+import App from './App'
+import router from "@/router/router";
 
-createApp(App).mount('#app')
+const app = createApp(App) //создали экземпляр компонента
+
+/*
+components.forEach(component => {
+    app.component(component.name, component)
+}) */
+
+app
+    .use(router) //Подключение маршрутизатора. Подобным образом подкл. библ., Bootstrap, Vuex и т.д.
+    .mount('#app'); //монтируем компонент(условно точка входа в приложение) в div
