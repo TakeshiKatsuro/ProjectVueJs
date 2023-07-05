@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOVCOM</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- ЗДЕСЬ БУДЕТ НАШЕ ПРИЛОЖЕНИЕ -->
+      <script type="module" src="/src/main.js">
+        // Создание экземпляра Vue
+        import App from "@/App.vue";
+
+        new Vue({
+          el: '#app',
+          components: {
+            App
+          },
+          template: '<router-view></router-view>'
+        });
+      </script>
+    </div>
+  </body>
+</html>
