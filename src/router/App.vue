@@ -1,11 +1,9 @@
-<script>
-export default {
-
-}
+<script setup>
+    import Main from "../pages/Main.vue";
 </script>
 
 <template>
-    <div class="app">
+    <div>
         <router-view></router-view>
     </div>
 </template>

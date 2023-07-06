@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-import App from './App'
+import App from '@/router/App.vue'
 import router from "@/router/router";
 
 const app = createApp(App) //создали экземпляр компонента

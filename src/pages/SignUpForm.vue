@@ -39,7 +39,7 @@ export default {
 
 <template>
     <h1 style="text-align: left; font-family: 'franklin gothic medium'; margin-left: 30px">SOVCOM<br>INVESTMENTS</h1>
-    <h2 style="text-align: center; font-family: 'franklin gothic medium'; margin-top: 100px">Добро пожаловать!</h2>
+    <h2 style="text-align: center; font-family: 'franklin gothic medium'; margin-top: 50px">РЕГИСТРАЦИЯ</h2>
     <form class="login-form">
         <div class="form-group">
             <label for="name">Имя</label>
@@ -77,6 +77,7 @@ export default {
     border: 2px solid;
     border-color: #282828;
     border-radius: 10px;
+    box-shadow: 10px 0px 30px indianred;
     padding: 35px;
 }
 
