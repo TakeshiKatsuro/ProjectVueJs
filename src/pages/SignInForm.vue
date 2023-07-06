@@ -37,7 +37,7 @@ export default {
             <label for="password">Пароль</label>
             <input type="password" id="password" v-model="password" />
         </div>
-        <!--<button type="submit" @click.prevent="login">Войти</button>-->
+        <!--Здесь будет переход на другую страницу-->
         <div class="btn" @click.prevent="login"><a href="#">Войти</a></div>
     </form>
 </template>
@@ -71,16 +71,6 @@ input[type="password"] {
     font-size: 16px;
     border-radius: 15px;
     background: lightpink;
-}
-
-button {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    background-color: #2196f3;
-    color: #fff;
-    border: none;
-    cursor: pointer;
 }
 
 .btn {

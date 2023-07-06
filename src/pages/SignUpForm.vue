@@ -66,7 +66,7 @@ export default {
             <input type="password" id="confirm_pass" v-model="confirm_pass" />
         </div>
         <!--<button type="submit" @click.prevent="login">Войти</button>-->
-        <div class="btn" @click.prevent="login"><a href="#">Войти</a></div>
+        <div class="btn" @click.prevent="login"><a href="#">Готово</a></div>
     </form>
 </template>
 
@@ -113,7 +113,7 @@ button {
 
 .btn {
     position: relative;
-    margin-top: 30px;
+    margin-bottom: 10px;
     width: 300px;
     height: 15px;
     display: flex;
