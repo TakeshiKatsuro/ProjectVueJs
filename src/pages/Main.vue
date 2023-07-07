@@ -12,13 +12,13 @@ export default {
     <h2 style="text-align: center; font-family: 'franklin gothic medium'; margin-top: 100px">ИНВЕСТИРОВАТЬ - ЭТО ПРОСТО!</h2>
     <div class="btn" @click="$router.push('/registration')"><a href="#">Стать клиентом</a></div>
     <div class="buttons">
-        <my-button  @click="$router.push('/')">Брокерский счёт</my-button>
-        <my-button  @click="$router.push('/')">Терминал</my-button>
+        <my-button  @click="$router.push('/briefcase')">Брокерский счёт</my-button>
+        <my-button  @click="$router.push('/catalog')">Терминал</my-button>
         <my-button  @click="$router.push('/authorization')">Войти</my-button>
     </div>
 </template>
 
-<style>
+<style scoped>
 .buttons {
     margin-top: 100px;
     justify-content: center;

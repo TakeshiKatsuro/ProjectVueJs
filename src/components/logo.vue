@@ -8,10 +8,11 @@
     <h1>SOVCOM<br>INVESTMENTS</h1>
 </template>
 
-<style>
+<style scoped>
   h1 {
     text-align: left;
-      font-family: "Franklin Gothic Medium";
+      margin-left: 30px;
       margin-top: 30px;
+      font-family: "Franklin Gothic Medium";
   }
 </style>

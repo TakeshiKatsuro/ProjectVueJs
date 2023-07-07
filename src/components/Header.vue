@@ -29,10 +29,10 @@ export default {
     position: fixed;
     display: flex;
     justify-content: space-between;
-    width: 80%;
+    width: 100%;
 }
 
 .btn-group {
-    left: -80px;
+    left: 20px;
 }
 </style>

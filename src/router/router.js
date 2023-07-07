@@ -3,6 +3,8 @@ import SignUpForm from "@/pages/SignUpForm.vue";
 import Main from "@/pages/Main.vue";
 import process from "process/browser";
 import {createRouter, createWebHistory} from "vue-router";
+import Catalog from "@/pages/Catalog.vue";
+import Briefcase from "@/pages/Briefcase.vue";
 
 /*Создаётся массив объектов маршрутов*/
 const routes = [
@@ -17,6 +19,16 @@ const routes = [
     { path: "/registration",
         name: "SignUpForm",
         component: SignUpForm,
+    },
+    {
+        path: '/catalog',
+        name: 'Catalog',
+        component: Catalog
+    },
+    {
+        path: '/briefcase',
+        name: 'Briefcase',
+        component: Briefcase
     }
 
 ]

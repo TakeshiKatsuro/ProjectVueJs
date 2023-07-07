@@ -33,8 +33,8 @@ export default {
     <h2 style="text-align: center; font-family: 'franklin gothic medium'; margin-top: 100px">Добро пожаловать!</h2>
     <form class="login-form">
         <div class="form-group">
-            <label for="username">Телефон</label>
-            <input type="text" id="username" v-model="username" />
+            <label for="login">Телефон</label>
+            <input type="text" id="login" v-model="login" />
         </div>
         <div class="form-group">
             <label for="password">Пароль</label>
@@ -45,7 +45,7 @@ export default {
     </form>
 </template>
 
-<style>
+<style scoped>
 .login-form {
     max-width: 300px;
     margin: 0 auto;
