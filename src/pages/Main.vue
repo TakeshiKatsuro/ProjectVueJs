@@ -1,11 +1,14 @@
 <script>
+import Logo from "@/components/logo.vue";
+
 export default {
+    components: {Logo}
 
 }
 </script>
 
 <template>
-    <h1 style="text-align: left; font-family: 'franklin gothic medium'; margin-left: 30px">SOVCOM<br>INVESTMENTS</h1>
+    <logo/>
     <h2 style="text-align: center; font-family: 'franklin gothic medium'; margin-top: 100px">ИНВЕСТИРОВАТЬ - ЭТО ПРОСТО!</h2>
     <div class="btn" @click="$router.push('/registration')"><a href="#">Стать клиентом</a></div>
     <div class="buttons">
