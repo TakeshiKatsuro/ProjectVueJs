@@ -30,15 +30,15 @@ export default {
 
 <template>
     <logo/>
-    <h2 style="text-align: center; font-family: 'franklin gothic medium'; margin-top: 100px">Добро пожаловать!</h2>
+    <h2 style="text-align: center; font-family: 'franklin gothic medium'; margin-top: 5%">Добро пожаловать!</h2>
     <form class="login-form">
         <div class="form-group">
             <label for="login">Телефон</label>
-            <input type="text" id="login" v-model="login" />
+            <input type="text" id="login" v-model="login" required/>
         </div>
         <div class="form-group">
             <label for="password">Пароль</label>
-            <input type="password" id="password" v-model="password" />
+            <input type="password" id="password" v-model="password" required/>
         </div>
         <!--Здесь будет переход на другую страницу-->
         <div class="btn" @click.prevent="login"><a href="#">Войти</a></div>
@@ -47,12 +47,12 @@ export default {
 
 <style scoped>
 .login-form {
-    max-width: 300px;
-    margin: 0 auto;
+    max-width: 350px;
+    margin: 2% auto;
     border: 2px solid;
     border-color: #282828;
     border-radius: 10px;
-    box-shadow: 10px 0px 30px indianred;
+    box-shadow: 10px 10px 35px dodgerblue;
     padding: 35px;
 }
 
@@ -73,13 +73,13 @@ input[type="password"] {
     padding: 5px;
     font-size: 16px;
     border-radius: 15px;
-    background: lightpink;
+    background: lightskyblue;
 }
 
 .btn {
     position: relative;
-    margin-top: 30px;
-    width: 300px;
+    margin-top: 15%;
+    width: 100%;
     height: 15px;
     display: flex;
     justify-content: center;
@@ -90,7 +90,7 @@ input[type="password"] {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -108,7 +108,7 @@ input[type="password"] {
     font-weight: 200;
     z-index: 1;
     transition: 0.5s;
-    backdrop-filter: blur(15px);
+    backdrop-filter: blur(10px);
 }
 .btn:hover a {
     letter-spacing: 3px;
@@ -136,7 +136,7 @@ input[type="password"] {
     bottom: -5px;
     width: 30px;
     height: 10px;
-    background: #f00;
+    background: dodgerblue;
     border-radius: 10px;
     transition: 0.5s;
     transition-delay: 0.5s;
@@ -156,21 +156,9 @@ input[type="password"] {
     top: -5px;
     width: 30px;
     height: 10px;
-    background: #f00;
+    background: dodgerblue;
     border-radius: 10px;
     transition: 0.5s;
     transition-delay: 0.5s;
-}
-.btn:hover::after /*lightup button*/ {
-    top: 0;
-    height: 50%;
-    width: 80%;
-    border-radius: 30px;
-}
-.btn:nth-child(1)::before, /*chnage 1*/
-.btn:nth-child(1)::after {
-    background: #ff1f1f;
-    box-shadow: 0 0 5px #ff1f1f, 0 0 15px #ff1f1f, 0 0 30px #ff1f1f,
-    0 0 60px #ff1f1f;
 }
 </style>

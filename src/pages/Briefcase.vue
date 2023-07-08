@@ -20,7 +20,7 @@
                                 </div>
                             </a>
                             <a class="navbar-brand" href="#">
-                                <div class="centered-icon">
+                                <div class="centered-icon" @click="$router.push('/briefcase/deposit')">
                                     <i class="bi bi-download"></i>
                                     <div>Пополнить</div>
                                 </div>
