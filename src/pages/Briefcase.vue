@@ -6,26 +6,26 @@
             <div class="card w-75 mb-3">
                 <div class="card-body">
                     <h5 class="card-title">Брокерский счет</h5>
-                    <p class="card-text">{{accountBalance}} <span style="font-weight: normal; font-size: 14px">₽</span></p>
+                    <p class="card-text">{{accountBalance()}} <span style="font-weight: normal; font-size: 14px">₽</span></p>
                 </div>
             </div>
             <div class="card w-75 mb-3">
                 <div class="card-body">
                     <nav class="navbar">
                         <div class="container-fluid">
-                            <a class="navbar-brand" href="#">
+                            <!--              <a class="navbar-brand" href="#">-->
+                            <!--                <div class="centered-icon">-->
+                            <!--                  <i class="bi bi-window-desktop"></i>-->
+                            <!--                  <div>Заявки</div>-->
+                            <!--                </div>-->
+                            <!--              </a>-->
+                            <a class="navbar-brand" href="#" @click="$router.push('/briefcase/deposit')">
                                 <div class="centered-icon">
-                                    <i class="bi bi-window-desktop"></i>
-                                    <div>Заявки</div>
-                                </div>
-                            </a>
-                            <a class="navbar-brand" href="#">
-                                <div class="centered-icon" @click="$router.push('/briefcase/deposit')">
                                     <i class="bi bi-download"></i>
                                     <div>Пополнить</div>
                                 </div>
                             </a>
-                            <a class="navbar-brand" href="#">
+                            <a class="navbar-brand" href="#" @click="$router.push('/briefcase/withdrawal')">
                                 <div class="centered-icon">
                                     <i class="bi bi-unindent"></i>
                                     <div>Вывести</div>
@@ -55,7 +55,7 @@
                     <div class="card-body-item">
                         <div class="card-item" v-if="selectedTab === 'stocks' || selectedTab === 'all'">
                             <h5>Акции</h5>
-                            <div class="card-money-item" v-for="stock in stocks" :key="stock.id">
+                            <div class="card-money-item" v-for="stock in  getBoughtStocks('stock')" :key="stock.name">
                                 <div class="card-money-title">
                                     <button type="button" class="btn btn-outline-primary" data-toggle="modal"
                                             data-target="#exampleModalLong"
@@ -71,7 +71,7 @@
                         </div>
                         <div class="card-item" v-if="selectedTab === 'bonds' || selectedTab === 'all'">
                             <h5>Облигации</h5>
-                            <div class="card-money-item" v-for="bond in bonds" :key="bond.id">
+                            <div class="card-money-item" v-for="bond in getBoughtStocks('bond')" :key="bond.name">
                                 <div class="card-money-title">
                                     <button type="button" class="btn btn-outline-primary" data-toggle="modal"
                                             data-target="#exampleModalLong"
@@ -87,7 +87,7 @@
                         </div>
                         <div class="card-item" v-if="selectedTab === 'funds' || selectedTab === 'all'">
                             <h5>Фонды</h5>
-                            <div class="card-money-item" v-for="fund in funds" :key="fund.id">
+                            <div class="card-money-item" v-for="fund in getBoughtStocks('fund')" :key="fund.name">
                                 <div class="card-money-title">
                                     <button type="button" class="btn btn-outline-primary" data-toggle="modal"
                                             data-target="#exampleModalLong"
@@ -106,7 +106,7 @@
             </div>
         </div>
     </div>
-  <!-- Modal -->
+    <!-- Modal -->
     <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -127,10 +127,6 @@
                         {{selectedInfo}}
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary">Продать</button>
-                    <button type="button" class="btn btn-primary">Купить</button>
-                </div>
             </div>
         </div>
     </div>
@@ -138,32 +134,56 @@
 
 <script>
 import Header from "@/components/Header.vue";
-
 export default {
     components: {Header},
     name: "PortfolioBriefcase",
     data() {
         return {
             selectedTab: 'all',
-            accountBalance: '1234567890',
             selectedName: '',
             selectedPrice: '',
             selectedInfo: '',
             selectedActive: '',
-            stocks: [
-                { id: 1, name: "Акция1", price: "цена", info: "информация" },
-                { id: 2, name: "Акция2", price: "цена", info: "информация" },
-            ],
-            bonds: [
-                { id: 1, name: "Облигация1", price: "цена", info: "информация" },
-                { id: 2, name: "Облигация2", price: "цена", info: "информация" },
-            ],
-            funds: [
-                { id: 1, name: "Фонд1", price: "цена", info: "информация" },
-                { id: 2, name: "Фонд2", price: "цена", info: "информация" },
-            ],
         };
-    }
+    },
+    computed: {
+        boughtStocks() {
+            return this.$store.state.history.filter(item => item.type === 'stock' && item.operation === 'buy');
+        },
+        boughtBonds() {
+            return this.$store.state.history.filter(item => item.type === 'bond' && item.operation === 'buy');
+        },
+        boughtFunds() {
+            return this.$store.state.history.filter(item => item.type === 'fund' && item.operation === 'buy');
+        },
+    },
+    methods: {
+        getBoughtStocks(type) {
+            switch (type) {
+                case 'stock':
+                    return this.boughtStocks;
+                case 'bond':
+                    return this.boughtBonds;
+                case 'fund':
+                    return this.boughtFunds;
+                default:
+                    return [];
+            }
+        },
+        accountBalance() {
+            let totalBalance = 0;
+            for (const stock of this.boughtStocks) {
+                totalBalance += stock.price;
+            }
+            for (const bond of this.boughtBonds) {
+                totalBalance += bond.price;
+            }
+            for (const fund of this.boughtFunds) {
+                totalBalance += fund.price;
+            }
+            return totalBalance;
+        }
+    },
 }
 </script>
 
@@ -224,5 +244,8 @@ li {
     margin-bottom: 50px;
     padding-bottom: 10px;
     border-bottom: #dee2e6 1px solid;
+}
+.container-fluid {
+    justify-content: flex-start;
 }
 </style>

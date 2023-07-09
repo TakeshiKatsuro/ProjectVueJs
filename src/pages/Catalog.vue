@@ -1,5 +1,5 @@
 <template>
-    <Header/>
+    <Header />
     <div class="container">
         <div class="portfolio-catalog">
             <h1>Каталог</h1>
@@ -74,7 +74,7 @@
             </div>
         </div>
     </div>
-  <!-- Modal -->
+    <!-- Modal -->
     <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -96,8 +96,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary">Продать</button>
-                    <button type="button" class="btn btn-primary">Купить</button>
+                    <button type="button" class="btn btn-secondary" @click="sellStock(selectedName, selectedPrice, selectedActive, selectedInfo)">Продать</button>
+                    <button type="button" class="btn btn-primary" @click="buyStock(selectedName, selectedPrice, selectedActive, selectedInfo)">Купить</button>
                 </div>
             </div>
         </div>
@@ -106,31 +106,85 @@
 
 <script>
 import Header from "@/components/Header.vue";
+import {mapMutations} from "vuex";
+import store from "../../store";
 export default {
-    components: {Header},
+    components: Header,
+    store: store,
     name: "PortfolioCatalog",
+    computed: {
+        // ...mapState({
+        //   history: state => state.history
+        // })
+    },
+    methods: {
+        ...mapMutations(['addOperation', 'removeOperation']),
+        buyStock(name, price, type, info) {
+            const currentDate = new Date();
+            const date = currentDate.getDate().toString().padStart(2, '0');
+            const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+            const year = currentDate.getFullYear();
+            const formattedDate = `${date}.${month}.${year}`;
+            const boughtStock = {
+                name: name,
+                price: price,
+                quantity: 1,
+                date: formattedDate,
+                type: type,
+                operation: "buy",
+                info: info
+            };
+            this.$store.commit('addOperation', boughtStock);
+        },
+        sellStock(name, price, type, info) {
+            const currentDate = new Date();
+            const date = currentDate.getDate().toString().padStart(2, '0');
+            const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+            const year = currentDate.getFullYear();
+            const formattedDate = `${date}.${month}.${year}`;
+            const soldStock = {
+                name: name,
+                price: price,
+                quantity: 1,
+                date: formattedDate,
+                type: type,
+                operation: "sell",
+                info: info
+            };
+            const index = this.$store.state.history.filter(item => item.name === name && item.type === type && item.operation === "buy");
+            console.log(index)
+            if (index.length !== 0) {
+                this.$store.commit('removeOperation', index);
+                this.$store.commit('addOperation', soldStock);
+            }
+            else alert("Купленной акции не найдено")
+        }
+    },
     data() {
         return {
+            history: [],
             selectedTab: 'all',
             accountBalance: '1234567890',
             selectedName: '',
             selectedPrice: '',
             selectedInfo: '',
             selectedActive: '',
+            boughtStocks: [],
+            soldStocks: [],
             stocks: [
-                {id: 1, name: "Акция1", price: "цена", info: "информация"},
-                {id: 2, name: "Акция2", price: "цена", info: "информация"},
+                {id: 1, name: "Акция1", price: 1000, info: "информация"},
+                {id: 2, name: "Акция2", price: 1000, info: "информация"},
             ],
             bonds: [
-                {id: 1, name: "Облигация1", price: "цена", info: "информация"},
-                {id: 2, name: "Облигация2", price: "цена", info: "информация"},
+                {id: 1, name: "Облигация1", price: 1000, info: "информация"},
+                {id: 2, name: "Облигация2", price: 1000, info: "информация"},
             ],
             funds: [
-                {id: 1, name: "Фонд1", price: "цена", info: "информация"},
-                {id: 2, name: "Фонд2", price: "цена", info: "информация"},
+                {id: 1, name: "Фонд1", price: 1000, info: "информация"},
+                {id: 2, name: "Фонд2", price: 1000, info: "информация"},
             ],
         };
-    }
+    },
 }
 </script>
 

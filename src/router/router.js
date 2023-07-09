@@ -1,11 +1,11 @@
 import SignInForm from "@/pages/SignInForm.vue";
 import SignUpForm from "@/pages/SignUpForm.vue";
 import Main from "@/pages/MainPage.vue";
-import process from "process/browser";
 import {createRouter, createWebHistory} from "vue-router";
 import Catalog from "@/pages/Catalog.vue";
 import Briefcase from "@/pages/Briefcase.vue";
 import DepositForm from "@/pages/DepositForm.vue"
+import Withdrawal from "@/pages/Withdrawal.vue";
 
 /*Создаётся массив объектов маршрутов*/
 const routes = [
@@ -35,6 +35,16 @@ const routes = [
         path: '/briefcase/deposit',
         name: 'Deposit',
         component: DepositForm
+    },
+    {
+        path: '/briefcase/withdrawal',
+        name: 'Withdrawal',
+        component: Withdrawal
+    },
+    {
+        path: '/history',
+        name: 'History',
+        component: History
     }
 ]
 
